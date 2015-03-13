@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.com.hightech</groupId>
+	<artifactId>cjweb2</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>cjweb2</name>
+	<description>JavaEE Framework Course: Hibernate, Spring and JSF</description>
+
+
+	<properties>
+		<hibernate.group>org.hibernate</hibernate.group>
+		<hibernate.version>4.2.6.Final</hibernate.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<spring.version>3.2.4.RELEASE</spring.version>
+		<spring.security.version>3.0.3.RELEASE</spring.security.version>
+	</properties>
+
+	<dependencies>
+		<!-- Persistence -->
+		<dependency>
+			<groupId>${hibernate.group}</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${hibernate.group}</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+
+		<!-- DataBase -->
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901.jdbc4</version>
+		</dependency>
+
+
+		<!-- Unit Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+
+
+		<!-- Spring Framework -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+
+
+
+
+	</dependencies>
+
+</project>
