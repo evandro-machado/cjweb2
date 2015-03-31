@@ -3,26 +3,31 @@ package br.com.hightech.model.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.hightech.model.entity.Customer;
 import br.com.hightech.model.util.JPAUtil;
-
+@Repository
 public class CustomerDAO {
+	
+//	Entity Manager Dependency injection
+	@PersistenceContext
 	EntityManager em;
 	
 	public CustomerDAO(){
-		em = JPAUtil.openConection();
+//		 em = JPAUtil.openConection();
 	}
 	
-	public void save(Customer customer){
+	@Transactional
+	public void save(Customer customer) throws CustomerDAOException{
 		try{
-			em.getTransaction().begin();
 			em.merge(customer);
-			em.getTransaction().commit();
 		}catch (Exception e){
-			e.printStackTrace();
-			em.getTransaction().rollback();
+			throw new CustomerDAOException("Not able to save customer.",e);
 		}
 	}
 		

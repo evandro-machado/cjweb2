@@ -13,9 +13,9 @@ public class JPAUtilTest {
 		//Object to be persisted
 		Customer customer = new Customer();
 		
-		customer.setName("Evandro");
-		customer.setEmail("evandrolmass@gmail.com");
-		customer.setPassword("123456");
+		customer.setName("Bruno");
+		customer.setEmail("bruno@sella.com");
+		customer.setPassword("aoaoaoa");
 		
 		
 		//Open transaction

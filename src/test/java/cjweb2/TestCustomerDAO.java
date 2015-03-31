@@ -1,50 +1,60 @@
 package cjweb2;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import junit.framework.Assert;
+import javax.inject.Inject;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.hightech.model.dao.CustomerDAO;
+import br.com.hightech.model.dao.CustomerDAOException;
 import br.com.hightech.model.entity.Customer;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"file:src/main/resources/applicationContext.xml"})
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
+@Transactional
 public class TestCustomerDAO {
+	
+	@Inject
+	CustomerDAO customerDAO;
 
-	//@Test
-	public void testSave() {
+	@Test
+	public void testSave() throws CustomerDAOException {
 		Customer customer = new Customer();
-		customer.setName("Virmerson");
-		customer.setPassword("123");
-		customer.setEmail("virmerson@htcursos.com");
+		customer.setName("Nova");
+		customer.setPassword("Teste");
+		customer.setEmail("cindy@teste.com");
 		
-		CustomerDAO customerDAO = new CustomerDAO();
 		customerDAO.save(customer);
 		
 		//Assert.assertTrue(customer.getId()!=null);
 		//Assert.assertNotNull(customer.getId());
 	}
 	
-	//@Test
+//	@Test
 	public void testReadAll(){
-		CustomerDAO customerDAO = new CustomerDAO();
 		List<Customer> customerList = customerDAO.readAll();
 		assertTrue(customerList.size()>0);
 	}
 	
 //	@Test
 	public void testRemove(){
-		CustomerDAO customerDAO = new CustomerDAO();
 		Customer customer = customerDAO.readById(2L);
 		customerDAO.delete(customer);
 		
 	}
 	
-	@Test
+//	@Test
 	public void testReadById(){
-		CustomerDAO customerDAO = new CustomerDAO();
 		Customer customer = customerDAO.readById(3L);
 		assertTrue(customer!=null);
 	}
