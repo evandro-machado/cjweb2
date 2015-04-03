@@ -30,11 +30,11 @@ public class CustomerDAO {
 			throw new CustomerDAOException("Not able to save customer.",e);
 		}
 	}
-		
+	
+	@Transactional
 	public void delete(Customer customer){
-		em.getTransaction().begin();
-		em.remove(customer);
-		em.getTransaction().commit();
+		Customer customerRemove = readById(customer.getId());
+		em.remove(customerRemove);
 	}
 	
 	@SuppressWarnings("unchecked")
