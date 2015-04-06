@@ -1,6 +1,6 @@
 package br.com.hightech.model.service;
 
-import br.com.hightech.model.dao.CustomerDAOException;
+import br.com.hightech.model.dao.DAOException;
 
 public class CustomerServiceException extends Exception {
 
@@ -9,7 +9,7 @@ public class CustomerServiceException extends Exception {
 		super(message);
 	}
 
-	public CustomerServiceException(String message, CustomerDAOException e) {
+	public CustomerServiceException(String message, DAOException e) {
 		super(message,e);
 	}
 

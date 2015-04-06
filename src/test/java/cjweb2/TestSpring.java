@@ -5,13 +5,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import br.com.hightech.model.dao.CustomerDAO;
-import br.com.hightech.model.dao.CustomerDAOException;
+import br.com.hightech.model.dao.DAOException;
 import br.com.hightech.model.entity.Customer;
 
 public class TestSpring {
 
 	@Test
-	public void testSpring() throws CustomerDAOException {
+	public void testSpring() throws DAOException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		CustomerDAO customerDAO = context.getBean(CustomerDAO.class);
 		Customer customer = new Customer();

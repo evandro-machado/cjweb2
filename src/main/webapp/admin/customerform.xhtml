@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<h:form>
+		<p:panel header="Customer Sign Up">
+			<p:messages>
+			</p:messages>
+
+
+			<p:panelGrid columns="2" id="customerPage">
+
+				<p:outputLabel value="Name:"></p:outputLabel>
+				<p:inputText value="#{customerBean.customer.name}"></p:inputText>
+
+
+				<p:outputLabel value="E-mail"></p:outputLabel>
+				<p:inputText value="#{customerBean.customer.email}"></p:inputText>
+
+				<p:outputLabel value="Password:"></p:outputLabel>
+				<p:password value="#{customerBean.customer.password}"></p:password>
+
+
+			</p:panelGrid>
+
+			<p:commandButton action="#{customerBean.save}" value="Save"
+				update="@form"></p:commandButton>
+		</p:panel>
+		<p:panel header="Customer List">
+			<p:dataTable value="#{customerBean.customerList}" var="customer" rows="9" paginator="true">
+				
+				<p:column headerText="ID" sortBy="#{customer.id}">
+					<h:outputText value="#{customer.id}" />
+				</p:column>
+				
+				
+				<p:column headerText="Name" sortBy="#{customer.name}">
+					<h:outputText value="#{customer.name}" />
+				</p:column>
+				
+				<p:column headerText="Email">
+					<h:outputText value="#{customer.email}" />
+				</p:column>
+				
+				<p:column headerText="Password">
+					<h:outputText value="#{customer.password}" />
+				</p:column>
+				<p:column headerText="Action">
+				<p:commandButton icon="ui-icon-trash" title="Remove" oncomplete="confirmation.show()">
+					<f:setPropertyActionListener value="#{customer}" target="#{customerBean.customer}" />
+				</p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" title="Edit" update="@form">
+						<f:setPropertyActionListener value="#{customer}" target="#{customerBean.customer}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+			<p:confirmDialog widgetVar="confirmation" message="Are you sure?" severity="alert" closeable="true">
+				<p:commandButton value="Yes" onclick="confirmation.hide()" actionListener="#{customerBean.remove}" update="@form" process="@this" />
+				<p:commandButton value="No" onclick="confirmation.hide()"/>
+			</p:confirmDialog>
+		</p:panel>
+	</h:form>
+</body>
+</html>

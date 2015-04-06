@@ -4,11 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.hightech.model.dao.CustomerDAO;
-import br.com.hightech.model.dao.CustomerDAOException;
+import br.com.hightech.model.dao.DAOException;
 import br.com.hightech.model.entity.Customer;
 
 
@@ -26,7 +25,7 @@ public class CustomerService {
 				throw new CustomerServiceException("Customer's name can't be empty.");
 			}
 			customerDAO.save(customer);
-		} catch (CustomerDAOException e) {
+		} catch (DAOException e) {
 			throw new CustomerServiceException("Not able to save customer.",e);
 		}
 	}

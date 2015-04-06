@@ -9,40 +9,43 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.hightech.model.entity.Customer;
+import br.com.hightech.model.entity.State;
+
 @Repository
-public class CustomerDAO {
-	
+public class StateDAO {
+
 //	Entity Manager Dependency injection
 	@PersistenceContext
 	EntityManager em;
 	
-	public CustomerDAO(){
+	public StateDAO(){
 //		 em = JPAUtil.openConection();
 	}
 	
 	@Transactional
-	public void save(Customer customer) throws DAOException{
+	public void save(State state) throws DAOException{
 		try{
-			em.merge(customer);
+			em.merge(state);
 		}catch (Exception e){
-			throw new DAOException("Not able to save customer.",e);
+			throw new DAOException("Not able to save state.",e);
 		}
 	}
 	
 	@Transactional
-	public void delete(Customer customer){
-		Customer customerRemove = readById(customer.getId());
-		em.remove(customerRemove);
+	public void delete(State state){
+		State stateRemove = readById(state.getId());
+		em.remove(stateRemove);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Customer> readAll(){
-		Query hql = em.createQuery("select c from Customer c");
+	public List<State> readAll(){
+		Query hql = em.createQuery("select e from State e");
 		return hql.getResultList();		
 	}
 	
-	public Customer readById(Long id){
-		return em.find(Customer.class, id);
+	public State readById(Long id){
+		return em.find(State.class, id);
 	}
+	
+	
 }
