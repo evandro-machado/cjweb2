@@ -4,7 +4,6 @@ import java.util.List;
 
 
 
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
@@ -13,49 +12,47 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 
-import br.com.hightech.model.entity.City;
-import br.com.hightech.model.entity.Customer;
-import br.com.hightech.model.service.CustomerService;
+import br.com.hightech.model.entity.State;
+import br.com.hightech.model.service.StateService;
 import br.com.hightech.model.service.ServiceException;
 
 @Controller
 @ViewScoped
-public class CustomerBean {
-	private Customer customer = new Customer();
+public class StateBean {
+	private State state = new State();
 
 	@Inject
-	private CustomerService customerService;
+	private StateService stateService;
 	
-	private List<Customer> customerList;
+	private List<State> stateList;
 	
 	@PostConstruct
 	public void init(){
-		customer.setCity(new City());
-		customerList = customerService.readAll();
+		stateList = stateService.readAll();
 	}
 	
 	
-	public CustomerService getCustomerService() {
-		return customerService;
+	public StateService getStateService() {
+		return stateService;
 	}
 
 
 
-	public void setCustomerService(CustomerService customerService) {
-		this.customerService = customerService;
+	public void setStateService(StateService stateService) {
+		this.stateService = stateService;
 	}
 
 
 
 	public void save(){
 		try {
-			customerService.save(customer);
-			//Clean customer data
-			customer = new Customer();
+			stateService.save(state);
+			//Clean state data
+			state = new State();
 			System.out.println("salvou");
 			
 			//Update List
-			customerList = customerService.readAll();
+			stateList = stateService.readAll();
 			
 			//Success Message
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Successfully Signed Up", null));
@@ -71,33 +68,33 @@ public class CustomerBean {
 	}
 	
 	public void remove(){
-		customerService.remove(customer);
+		stateService.remove(state);
 		//Clean form
-		customer = new Customer();
+		state = new State();
 		//Update List
-		customerList = customerService.readAll();
+		stateList = stateService.readAll();
 	}
 	
 	
 	
-	public Customer getCustomer() {
-		return customer;
+	public State getState() {
+		return state;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-
-
-	public List<Customer> getCustomerList() {
-		return customerList;
+	public void setState(State state) {
+		this.state = state;
 	}
 
 
 
-	public void setCustomerList(List<Customer> customerList) {
-		this.customerList = customerList;
+	public List<State> getStateList() {
+		return stateList;
+	}
+
+
+
+	public void setStateList(List<State> stateList) {
+		this.stateList = stateList;
 	}
 	
 

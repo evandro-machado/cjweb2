@@ -6,23 +6,23 @@ import javax.faces.convert.Converter;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.hightech.model.entity.State;
-import br.com.hightech.model.service.StateService;
+import br.com.hightech.model.entity.City;
+import br.com.hightech.model.service.CityService;
 
 
 @Named
-public class StateConverter implements Converter{
+public class CityConverter implements Converter{
 
 	@Inject
-	StateService stateService;
+	CityService cityService;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String id) {
 		// TODO Auto-generated method stub
 		try{
-			State state = stateService.readById(Long.parseLong(id));
-			return state;
+			City city = cityService.readById(Long.parseLong(id));
+			return city;
 		}catch(NumberFormatException e){
 			e.printStackTrace();
 			return null;	
@@ -32,18 +32,11 @@ public class StateConverter implements Converter{
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component,
-			Object state) {
+			Object city) {
 		// TODO Auto-generated method stub
-		try{
-			State s = (State) state;
-			return s.getId().toString();
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			return null;
-			
-		}
-		
+		City c = (City) city;
+		if(c.getId() == null) return null;
+		return c.getId().toString();
 	}
 
 }

@@ -15,6 +15,19 @@
 
 			<p:panelGrid columns="2" id="customerPage">
 
+				<p:outputLabel value="State:"></p:outputLabel>
+				<p:selectOneMenu value="#{customerBean.customer.city.state}" converter="#{stateConverter}" valueChangeListener="#{cityBean.readCities}">
+					<f:selectItem  noSelectionOption="true" itemLabel="Select"/>
+					<f:selectItems value="#{stateBean.stateList}" var="sta" itemLabel="#{sta.name}"/>
+					<f:ajax event="change" render="selCity" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="City:"></p:outputLabel>
+				<p:selectOneMenu value="#{customerBean.customer.city}" converter="#{cityConverter}" id="selCity">
+					<f:selectItems value="#{cityBean.cityList}" var="cit" itemLabel="#{cit.name}"/>
+				</p:selectOneMenu>
+
+
 				<p:outputLabel value="Name:"></p:outputLabel>
 				<p:inputText value="#{customerBean.customer.name}"></p:inputText>
 
@@ -50,6 +63,11 @@
 				<p:column headerText="Password">
 					<h:outputText value="#{customer.password}" />
 				</p:column>
+
+				<p:column headerText="State">
+					<h:outputText value="#{customer.city.state.name}" />
+				</p:column>
+
 				<p:column headerText="Action">
 				<p:commandButton icon="ui-icon-trash" title="Remove" oncomplete="confirmation.show()">
 					<f:setPropertyActionListener value="#{customer}" target="#{customerBean.customer}" />

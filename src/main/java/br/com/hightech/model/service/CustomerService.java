@@ -17,16 +17,16 @@ public class CustomerService {
 	@Inject
 	private CustomerDAO customerDAO;
 	
-	public void save(Customer customer) throws CustomerServiceException{
+	public void save(Customer customer) throws ServiceException{
 
 		try {
 			//Business Rules validation
 			if(customer.getName()==null || customer.getName()==""){
-				throw new CustomerServiceException("Customer's name can't be empty.");
+				throw new ServiceException("Customer's name can't be empty.");
 			}
 			customerDAO.save(customer);
 		} catch (DAOException e) {
-			throw new CustomerServiceException("Not able to save customer.",e);
+			throw new ServiceException("Not able to save customer.",e);
 		}
 	}
 	

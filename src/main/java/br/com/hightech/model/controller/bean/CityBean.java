@@ -5,57 +5,67 @@ import java.util.List;
 
 
 
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 
 import br.com.hightech.model.entity.City;
-import br.com.hightech.model.entity.Customer;
-import br.com.hightech.model.service.CustomerService;
+import br.com.hightech.model.entity.State;
+import br.com.hightech.model.service.CityService;
 import br.com.hightech.model.service.ServiceException;
 
 @Controller
 @ViewScoped
-public class CustomerBean {
-	private Customer customer = new Customer();
+public class CityBean {
+	private City city = new City();
 
 	@Inject
-	private CustomerService customerService;
+	private CityService cityService;
 	
-	private List<Customer> customerList;
+	private List<City> cityList;
 	
 	@PostConstruct
 	public void init(){
-		customer.setCity(new City());
-		customerList = customerService.readAll();
+		//cityList = cityService.readAll();
 	}
 	
 	
-	public CustomerService getCustomerService() {
-		return customerService;
+	public void readCities(ValueChangeEvent event){
+		
+		if(event.getNewValue() != event.getOldValue()){
+
+			State state = (State) event.getNewValue();
+			cityList = cityService.readCities(state);
+		}
+	}
+	
+	public CityService getCityService() {
+		return cityService;
 	}
 
 
 
-	public void setCustomerService(CustomerService customerService) {
-		this.customerService = customerService;
+	public void setCityService(CityService cityService) {
+		this.cityService = cityService;
 	}
 
 
 
 	public void save(){
 		try {
-			customerService.save(customer);
-			//Clean customer data
-			customer = new Customer();
+			cityService.save(city);
+			//Clean city data
+			city = new City();
 			System.out.println("salvou");
 			
 			//Update List
-			customerList = customerService.readAll();
+			cityList = cityService.readAll();
 			
 			//Success Message
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Successfully Signed Up", null));
@@ -71,33 +81,33 @@ public class CustomerBean {
 	}
 	
 	public void remove(){
-		customerService.remove(customer);
+		cityService.remove(city);
 		//Clean form
-		customer = new Customer();
+		city = new City();
 		//Update List
-		customerList = customerService.readAll();
+		cityList = cityService.readAll();
 	}
 	
 	
 	
-	public Customer getCustomer() {
-		return customer;
+	public City getCity() {
+		return city;
 	}
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-
-
-	public List<Customer> getCustomerList() {
-		return customerList;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 
 
-	public void setCustomerList(List<Customer> customerList) {
-		this.customerList = customerList;
+	public List<City> getCityList() {
+		return cityList;
+	}
+
+
+
+	public void setCityList(List<City> cityList) {
+		this.cityList = cityList;
 	}
 	
 

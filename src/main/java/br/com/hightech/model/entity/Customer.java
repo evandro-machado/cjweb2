@@ -24,14 +24,16 @@ public class Customer {
 	
 	@ManyToOne
 	@JoinColumn
-	private State state;
+	private City city;
 
-	public State getState() {
-		return state;
+
+
+	public City getCity() {
+		return city;
 	}
 
-	public void setState(State state) {
-		this.state = state;
+	public void setCity(City city) {
+		this.city = city;
 	}
 
 	public Long getId() {
