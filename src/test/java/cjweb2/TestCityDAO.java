@@ -28,15 +28,19 @@ public class TestCityDAO {
 	@Inject
 	StateDAO stateDAO;
 	
+	
+	
 	@Test
 	public void testSave() throws DAOException{
-		State state = stateDAO.readById(77L);
+		State state = stateDAO.readById(75L);
 		
-		City city = new City();
-		city.setName("Campinas");
-		city.setState(state);
+        stateDAO.delete(state);
 		
-		cityDAO.save(city);
+//		City city = new City();
+//		city.setName("Campinas");
+//		city.setState(state);
+//		
+//		cityDAO.save(city);
 	}
 	
 }
